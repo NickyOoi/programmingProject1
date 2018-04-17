@@ -154,11 +154,11 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        ShareMarketGame\Providers\AppServiceProvider::class,
+        ShareMarketGame\Providers\AuthServiceProvider::class,
+        // ShareMarketGame\Providers\BroadcastServiceProvider::class,
+        ShareMarketGame\Providers\EventServiceProvider::class,
+        ShareMarketGame\Providers\RouteServiceProvider::class,
 
     ],
 

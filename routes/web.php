@@ -12,7 +12,10 @@
 */
 
 Route::get('/', function () {
+    //$lists = App\Share::all();
+
     return view('welcome');
+    //return $lists;
 });
 
 Auth::routes();

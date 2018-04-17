@@ -21,31 +21,23 @@
                 margin: 0;
             }
 
-            .container {  
-                position: relative; 
-            }
-
-            .container:before {
-                content: "";
-                position: absolute;
-                top: 0;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                z-index: 1;      
+            .bg-container{
                 width: 100%;
                 height: auto;
+                position: relative;
+            }
+            .bg-container::before{
+                content: "";
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                width: 100%;
+                height: 100%;
+                z-index:99;
                 background-image: url("http://www.aceinvestmentadvisory.com/images/services/ace_img/stock-market-18.png");
                 background-size: cover;
                 opacity: 0.3;
             }
-
-            .content2 {
-                position: relative; 
-                z-index: 2;
-                width: 100%;
-                height: 100vh;
-            }​
             
             .full-height {
                 height: 100vh;
@@ -68,8 +60,6 @@
             }
 
             .content {
-                position: fixed;
-                top: 50%;
                 text-align: center;
             }
 
@@ -98,29 +88,27 @@
         </style>
     </head>
     <body>
-        <div class="container">
-            <div class="content2">
-                <div class="flex-center position-ref full-height">
-                    @if (Route::has('login'))
-                        <div class="top-right links">
-                            @auth
-                                <a href="{{ url('/home') }}">Home</a>
-                            @else
-                                <a href="{{ route('login') }}">Login</a>
-                                <a href="{{ route('register') }}">Register</a>
-                            @endauth
-                        </div>
-                    @endif
-
-                    <div class="content">
-                        <div class="title m-b-md">
-                            Budding Share Market Investor
-                        </div>
-
-                        <div class="links">
-                            <p>Be the leader in today's share market</p>
-                        </div>          
+        <div class="bg-container">
+            <div class="flex-center position-ref full-height">
+                @if (Route::has('login'))
+                    <div class="top-right links">
+                        @auth
+                            <a href="{{ url('/home') }}">Home</a>
+                        @else
+                            <a href="{{ route('login') }}">Login</a>
+                            <a href="{{ route('register') }}">Register</a>
+                        @endauth
                     </div>
+                @endif
+
+                <div class="content">
+                    <div class="title m-b-md">
+                        Budding Share Market Investor
+                    </div>
+
+                    <div class="links">
+                        <p>Be the leader in today's share market</p>
+                    </div>          
                 </div>
             </div>
         </div>
