@@ -24,7 +24,7 @@ class TradingAccountController extends Controller
     	//Save to database
     	$account->save();
 
-		return view('/home');
+		return redirect('/home');
 
     }
 

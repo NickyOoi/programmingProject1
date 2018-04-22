@@ -18,7 +18,7 @@ Route::get('/', function () {
     //return $lists;
 });
 
-Route::post('home', 'TradingAccountController@createTradingAccount');
+Route::post('/home', 'TradingAccountController@createTradingAccount');
 
 Route::get('/home', function () {
     $lists = ShareMarketGame\Share::all();

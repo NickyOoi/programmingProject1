@@ -1,4 +1,14 @@
 @extends('layouts.app2')
+<?php
+$hostname = "localhost";
+$username = "root";
+$password = "";
+$databaseName = "database";
+
+$connect = mysqli_connect($hostname, $username, $password, $databaseName);
+$query = "SELECT `nickname`,`balance` FROM `trading_accounts`";
+$tradeAccount = mysqli_query($connect, $query);
+?>
 <style>
 .button {
   display: inline-block;
@@ -144,9 +154,10 @@ input[type=text] {
                   </tr>
               </thead>
               <tbody>
+                  <?php while($row1 = mysqli_fetch_array( $tradeAccount )):;?>
                   <tr>
-                    <td>Sample 1</td>
-                    <td>$AUD 500,000</td>
+                    <td><?php echo $row1[0];?></td>
+                    <td><?php echo $row1[1];?></td>
                     <td>
                       <div class="dropdown">
                         <img class="img2" src="https://cdn3.iconfinder.com/data/icons/gray-toolbar-4/512/dustbin-512.png">
@@ -157,19 +168,7 @@ input[type=text] {
                       </div>
                     </td>
                   </tr>
-                  <tr>
-                    <td>Sample 2</td>
-                    <td>$AUD 1,000,000</td>
-                    <td>
-                      <div class="dropdown">
-                        <img class="img2" src="https://cdn3.iconfinder.com/data/icons/gray-toolbar-4/512/dustbin-512.png">
-                        <div class="dropdown-content2">
-                          <h5><b>Confirm deleting this trading account?</b></h5>
-                          <button onclick="myFunction()" class="button2">Delete</button>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
+              <?php endwhile;?>
               </tbody>
           </table>
         </div>
@@ -202,8 +201,8 @@ input[type=text] {
             </tbody>
           </table>
         </div>
-      </div>
     </div>
+</div>
 
     <div class="col-sm-6">
       <div class="card">
