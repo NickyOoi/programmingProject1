@@ -175,7 +175,7 @@ input[type=text] {
         </div>
       </div>
     </div>
-  
+
     <div class="col-sm-6">
       <div class="card">
         <div class="card-body">
@@ -194,7 +194,7 @@ input[type=text] {
                 <td>{{$list->code}}</td>
                 <td>{{$list->name}}</td>
                 <td>
-                  <a href='/dashboard/{{ $list->code }}'>${{$list->value}}
+                  <a href='/home/{{ $list->code }}'>${{$list->value}}
                   </a>
                 </td>
               </tr>
@@ -214,12 +214,15 @@ input[type=text] {
           <ul class="list-group list-group-flush">
             <div class="dropdown">
               <span><li class="list-group-item">New Trading Account</li></span>
-              <div class="dropdown-content">
-                <h5><b>New account nickname : </b></h5>
-                <input type="text" id="newTradeAccountName" name="newTradeAccountName" 
-                  placeholder="Enter a nickname for the new trading account" required>
-                <button class="button" style="vertical-align:middle"><span>Proceed </span></button>
-              </div>
+                <div class="dropdown-content">
+                    <h5><b>New account nickname : </b></h5>
+                    <form action="{{ action('TradingAccountController@createTradingAccount') }}" method="post">
+                    <input type="text" id="nname" name="nname"
+                      placeholder="Enter a nickname for the new trading account" required>
+                    <button class="button" style="vertical-align:middle" type="submit"><span>Proceed </span></button>
+                    <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
+                    </form>
+                </div>
             </div>
             <li class="list-group-item">Transaction History</li>
             <li class="list-group-item">My Stock Performance</li>
