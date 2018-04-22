@@ -1,14 +1,4 @@
 @extends('layouts.app2')
-<?php
-$hostname = "localhost";
-$username = "root";
-$password = "";
-$databaseName = "database";
-
-$connect = mysqli_connect($hostname, $username, $password, $databaseName);
-$query = "SELECT `nickname`,`balance` FROM `trading_accounts`";
-$tradeAccount = mysqli_query($connect, $query);
-?>
 <style>
 .button {
   display: inline-block;
@@ -154,10 +144,10 @@ input[type=text] {
                   </tr>
               </thead>
               <tbody>
-                  <?php while($row1 = mysqli_fetch_array( $tradeAccount )):;?>
+                  @foreach ($lists2 as $list)
                   <tr>
-                    <td><?php echo $row1[0];?></td>
-                    <td><?php echo $row1[1];?></td>
+                    <td>{{$list->nickname}}</td>
+                    <td>{{$list->balance}}</td>
                     <td>
                       <div class="dropdown">
                         <img class="img2" src="https://cdn3.iconfinder.com/data/icons/gray-toolbar-4/512/dustbin-512.png">
@@ -168,7 +158,7 @@ input[type=text] {
                       </div>
                     </td>
                   </tr>
-              <?php endwhile;?>
+                  @endforeach
               </tbody>
           </table>
         </div>
