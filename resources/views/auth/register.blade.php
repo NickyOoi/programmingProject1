@@ -24,9 +24,12 @@
         width: 100%;
         height: 100vh;
     }
+
+    .card {
+        top: 40%;
+    }
 </style>​
 @extends('layouts.app')
-
 @section('content')
 <div class="container2">
     <div class="content2">
@@ -89,7 +92,7 @@
                                         <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                                     </div>
                                 </div>
-
+                                
                                 <div class="form-group row mb-0">
                                     <div class="col-md-6 offset-md-4">
                                         <button type="submit" class="btn btn-primary">
@@ -103,6 +106,6 @@
                 </div>
             </div>
         </div>
-        @endsection
     </div>
 </div>
+@endsection

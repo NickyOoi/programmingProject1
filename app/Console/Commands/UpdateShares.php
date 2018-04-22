@@ -45,13 +45,13 @@ class UpdateShares extends Command
     }
 
     /**
-     * Execute the console command.
+     * Get current value of share from API.
      *
-     * @return mixed
+     * @return Value of share
      */
     private function getShareValue($code)
     {
         $response=json_decode(file_get_contents("https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol="+$code+".ax&interval=1min&apikey=6DD89FIYMJ57CPGO"));
-        return $response["Time Series (1min)"][date("d-m-Y")+" 01:00:00"]["4. close"];
+        return $response["Time Series (1min)"][0]["4. close"];
     }
 }

@@ -25,6 +25,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('shares:update')->everyThirtyMinutes()->between('09:00','17:00');
+        $schedule->command('leaderboard:update')->dailyAt('00:00');
     }
 
     /**
