@@ -1,7 +1,7 @@
 @extends('layouts.app')
 <style>
-    .container2 {  
-         position: relative; 
+    .container2 {
+         position: relative;
     }
 
     .container2:before {
@@ -11,7 +11,7 @@
         bottom: 0;
         left: 0;
         right: 0;
-        z-index: 1;      
+        z-index: 1;
         width: 100%;
         height: auto;
         background-image: url("http://www.visionality.com/wp-content/uploads/2015/10/corporate.jpg");
@@ -20,12 +20,13 @@
     }
 
     .content2 {
-        position: relative; 
+        position: relative;
         z-index: 2;
         width: 100%;
         height: 100vh;
     }
 </style>​
+@section('content')
 <div class="container2">
     <div class="content2">
         <div class="container">
@@ -102,3 +103,4 @@
         </div>
     </div>
 </div>
+@endsection

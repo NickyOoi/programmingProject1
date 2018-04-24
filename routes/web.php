@@ -21,16 +21,24 @@ Route::get('/', function () {
 Route::post('/home', 'TradingAccountController@createTradingAccount');
 
 Route::get('/home', function () {
+    $session_id = \Auth::user()->id;
     $lists = ShareMarketGame\Share::all();
-    $lists2 = ShareMarketGame\TradingAccount::all();
+    $lists2 = ShareMarketGame\TradingAccount::where('user_id' , '=', $session_id)->get();
+    $lists3 = ShareMarketGame\TradingAccount::all();
 
-    return view('home', compact('lists', 'lists2'));
+    return view('home', compact('lists', 'lists2', 'lists3'));
     //return $lists;
 });
 
 Route::get('/nickname', function () {
 
     return view('nickname', compact('lists'));
+    //return $lists;
+});
+
+Route::get('/resetpassword', function () {
+
+    return view('auth.passwords.email');
     //return $lists;
 });
 
@@ -49,10 +57,8 @@ Route::get('/general-settings', function () {
 });
 
 Route::get('/transfer', function () {
-    $lists = ShareMarketGame\Share::all();
-
-    return view('transfer', compact('lists'));
-    //return $lists;
+    $lists3 = ShareMarketGame\TradingAccount::all();
+    return view('transfer', compact('lists3'));
 });
 
 Route::get('/search', function () {

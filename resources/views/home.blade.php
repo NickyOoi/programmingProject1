@@ -124,12 +124,12 @@ input[type=text] {
 </style>
 @section('content')
 <div class="container">
-  <div class="row justify-content-left">
-    @if (session('status'))
+    <div class="row justify-content-left">
+        @if (session('status'))
         <div class="alert alert-success">
             {{ session('status') }}
         </div>
-    @endif
+        @endif
 
     <div class="col-sm-6">
       <div class="card">
@@ -223,6 +223,7 @@ input[type=text] {
         </div>
       </div>
     </div>
+
   </div>
 </div>
 <script>
