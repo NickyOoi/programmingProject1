@@ -1,5 +1,8 @@
 @extends('layouts.app2')
 <style>
+.container{
+    width: 100%;
+}
 .button {
   display: inline-block;
   border-radius: 4px;
@@ -121,6 +124,30 @@ input[type=text] {
         width: 100%;
         height: 100vh;
 }
+#table-scroll {
+  height:160px;
+  overflow:auto;
+  margin-top:20px;
+}
+#search-text-input{
+    border-top:thin solid  #e5e5e5;
+    border-right:thin solid #e5e5e5;
+    border-bottom:0;
+    border-left:thin solid  #e5e5e5;
+    box-shadow:0px 1px 1px 1px #e5e5e5;
+    height:40px;
+    margin:.8em 0 0 0em;
+    outline:0;
+    padding:.4em 0 .4em .6em;
+    width:450px;
+}
+.search{
+    height: 35px;
+    width: 35px;
+}
+.bar {
+    white-space: nowrap;
+}
 </style>
 @section('content')
 <div class="container">
@@ -139,7 +166,7 @@ input[type=text] {
               <thead>
                   <tr>
                     <th>Nickname</th>
-                    <th>Account Balance</th>
+                    <th>Account Balance (AUD)</th>
                     <th>Action</th>
                   </tr>
               </thead>
@@ -169,27 +196,64 @@ input[type=text] {
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Stock List</h5>
-          <table class="table table-striped table-sm">
-            <thead>
-              <tr>
-                <th>Code</th>
-                  <th>Name</th>
-                  <th>Value</th>
-                </tr>
-            </thead>
-            <tbody>
-              @foreach ($lists as $list)
-              <tr>
-                <td>{{$list->code}}</td>
-                <td>{{$list->name}}</td>
-                <td>
-                  <a href='/home/{{ $list->code }}'>${{$list->value}}
-                  </a>
-                </td>
-              </tr>
-              @endforeach
-            </tbody>
-          </table>
+            <div class="bar">
+                <!--<form method="post">-->
+                <input type='text' placeholder='Search...' id='search-text-input' name='search-text-input'>
+                <img class="search" src='https://cdn1.iconfinder.com/data/icons/hawcons/32/698627-icon-111-search-512.png'>
+                <div id="searchOutput"></div>
+                <!--</form>-->
+            </div>
+            <script>
+                $(document).ready(function(){
+                    $(".search").click(function(){
+                        if((document.getElementById('search-text-input').value) != ""){
+                            $('#searchOutput').html(`
+
+                            `)
+                            @foreach ($lists as $list)
+                                //console.log("{{$list->nickname}}");
+                                    var code = "{{$list->code}}";
+                                    var name = "{{$list->name}}";
+                                    if( ((document.getElementById('search-text-input').value).toUpperCase() == (code).toUpperCase()) || ((name).toUpperCase().includes((document.getElementById('search-text-input').value).toUpperCase()) == true) ){
+                                        $('#searchOutput').html(`
+                                            <br>
+                                            <b>Match Results:</b>
+                                            <br>
+                                            <p>Code: {{$list->code}} &nbsp; Name: {{$list->name}}</p>
+                                        `)
+                                    }
+                            @endforeach
+                        }else{
+                            $('#searchOutput').html(`
+                                <p><font color="red">Error: Invalid value. Please enter a stock code / name.</font></p>
+                            `)
+                        }
+                    });
+                });
+            </script>
+            <div id="table-scroll">
+              <table class="table table-striped table-sm">
+                <thead>
+                  <tr>
+                    <th>Code</th>
+                      <th>Name</th>
+                      <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  @foreach ($lists as $list)
+                  <tr>
+                    <td>{{$list->code}}</td>
+                    <td>{{$list->name}}</td>
+                    <td>
+                      <a href='/home/{{ $list->code }}'>${{$list->value}}
+                      </a>
+                    </td>
+                  </tr>
+                  @endforeach
+                </tbody>
+              </table>
+            </div>
         </div>
     </div>
 </div>
@@ -227,8 +291,8 @@ input[type=text] {
   </div>
 </div>
 <script>
-  function myFunction() {
+    function myFunction() {
       confirm("Are you sure you want to delete?");
-  }
+    }
 </script>
 @endsection

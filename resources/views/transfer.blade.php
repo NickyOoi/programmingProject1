@@ -75,33 +75,31 @@
                 <div class="card-header">{{ __('Transfer Funds') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="{{ action('TradingAccountController@transferFunds') }}">
                         @csrf
 
                         &nbsp;&nbsp;
                         <div class="form-group row">
                             <label for="transferFrom" class="col-sm-4 col-form-label text-md-right">{{ __('Transfer From :') }}</label>
-                                 
+
                             <div class="col-md-6">
-                                <select class="form-control{{ $errors->has('transferFrom') ? ' is-invalid' : '' }} tansferFrom" name="transferFrom" required>
-                                    <option value="nicholas123">nicholas123</option>
-                                    <option value="nick15">nick15</option>
-                                    <option value="nic567">nic567</option>
+                                <select class="form-control{{ $errors->has('transferFrom') ? ' is-invalid' : '' }}" id="sender" name="sender" required>
+                                    @foreach ($lists2 as $list)
+                                        <option value="{{$list->nickname}}">{{$list->nickname}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
-                        
+
                         &nbsp;&nbsp;
                         <div class="form-group row">
                             <label for="transferTo" class="col-md-4 col-form-label text-md-right">{{ __('Transfer To :') }}</label>
 
                             <div class="col-md-6">
-                                <select class="form-control{{ $errors->has('transferTo') ? ' is-invalid' : '' }} transferTo" name="transferTo" required>
-                                    <option value="nicholas123">nicholas123</option>
-                                    <option value="nick15">nick15</option>
-                                    <option value="nic567">nic567</option>
-                                    <option value="tom12">tom12</option>
-                                    <option value="alex34">alex34</option>
+                                <select class="form-control{{ $errors->has('transferTo') ? ' is-invalid' : '' }}" id="receiver" name="receiver" required>
+                                    @foreach ($lists3 as $list)
+                                        <option value="{{$list->nickname}}">{{$list->nickname}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -111,7 +109,7 @@
                             <label for="transferAmmount" class="col-sm-4 col-form-label text-md-right">{{ __('Transfer Ammount (AUD) :') }}</label>
 
                             <div class="col-md-6">
-                                <input id="transAmmount" type="text" class="form-control{{ $errors->has('transAmmount') ? ' is-invalid' : '' }}" name="transAmmount" required autofocus>
+                                <input id="amount" type="text" class="form-control{{ $errors->has('transAmmount') ? ' is-invalid' : '' }}" name="amount" required autofocus>
                             </div>
                         </div>
 

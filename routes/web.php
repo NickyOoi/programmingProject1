@@ -31,10 +31,13 @@ Route::get('/home', function () {
 });
 
 Route::get('/nickname', function () {
-
-    return view('nickname', compact('lists'));
-    //return $lists;
+    $session_id = \Auth::user()->id;
+    $lists2 = ShareMarketGame\TradingAccount::where('user_id' , '=', $session_id)->get();
+    $lists3 = ShareMarketGame\TradingAccount::all();
+    return view('nickname', compact('lists2', 'lists3'));
 });
+
+Route::post('/nickname', 'TradingAccountController@changeNickname');
 
 Route::get('/resetpassword', function () {
 
@@ -57,9 +60,13 @@ Route::get('/general-settings', function () {
 });
 
 Route::get('/transfer', function () {
+    $session_id = \Auth::user()->id;
+    $lists2 = ShareMarketGame\TradingAccount::where('user_id' , '=', $session_id)->get();
     $lists3 = ShareMarketGame\TradingAccount::all();
-    return view('transfer', compact('lists3'));
+    return view('transfer', compact('lists2', 'lists3'));
 });
+
+Route::post('/transfer', 'TradingAccountController@transferFunds');
 
 Route::get('/search', function () {
     $lists = ShareMarketGame\Share::all();

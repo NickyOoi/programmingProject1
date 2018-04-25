@@ -3,7 +3,7 @@
     .title {
         text-align: center;
     }
-    hr { 
+    hr {
         display: block;
         margin-top: 0.5em;
         margin-bottom: 0.5em;
@@ -12,7 +12,7 @@
         border-style: inset;
         border-width: 1px;
         width: 75%;
-    } 
+    }
 </style>
 @section('content')
 <div class="container">
@@ -27,14 +27,18 @@
                     <hr align="center">
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="{{ action('TradingAccountController@changeNickname') }}">
                         @csrf
 
                         <div class="form-group row">
                             <label for="oldNickname" class="col-sm-4 col-form-label text-md-right">{{ __('Current Nickname') }}</label>
 
                             <div class="col-md-6">
-                                <input id="oldNickname" type="text" class="form-control{{ $errors->has('oldNickname') ? ' is-invalid' : '' }}" name="oldNickname" required autofocus>
+                                <select class="form-control{{ $errors->has('oldNickname') ? ' is-invalid' : '' }}" id="old" name="old" required>
+                                    @foreach ($lists2 as $list)
+                                        <option value="{{$list->nickname}}">{{$list->nickname}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
 
@@ -42,7 +46,7 @@
                             <label for="newNickname" class="col-md-4 col-form-label text-md-right">{{ __('New Nickname') }}</label>
 
                             <div class="col-md-6">
-                                <input id="newNickname" type="text" class="form-control{{ $errors->has('newNickname') ? ' is-invalid' : '' }}" name="newNickname" required>
+                                <input id="new" type="text" class="form-control{{ $errors->has('newNickname') ? ' is-invalid' : '' }}" name="new" required>
                             </div>
                         </div>
                         &nbsp;&nbsp;

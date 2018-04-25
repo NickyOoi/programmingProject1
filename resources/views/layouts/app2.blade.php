@@ -28,11 +28,7 @@
         height:48px;
     }
     .dropdown-menu{
-        width: 100%;
-    }
-    .con {
-        width: 100%;
-        height: 100%;
+        left: -67px;
     }
     .bar {
         white-space: nowrap;
@@ -195,8 +191,8 @@
                 @guest
                 @else
                     <li class="nav-item dropdown">
-                        <div class="bar">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        <!--<div class="bar">-->
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle bar" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }}
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -215,7 +211,7 @@
                                         </form>
                                 </div>
                             </div>
-                        </div>
+                        <!--</div>-->
                     </li>
                 @endguest
             </ul>

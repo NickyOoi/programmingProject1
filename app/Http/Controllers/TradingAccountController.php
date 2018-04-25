@@ -31,12 +31,13 @@ class TradingAccountController extends Controller
 	//Change nickname of trading account
     public function changeNickname(Request $request){
         $old=$request->input('old');
-        $new->input('new');
+        $new=$request->input('new');
     	//Retrieve record
     	$account=TradingAccount::find($old);
 
     	//Update nickname
     	$account->update(['nickname'=>$new]);
+        return redirect('/nickname');
     }
 
     //Change nickname of trading account
@@ -84,14 +85,16 @@ class TradingAccountController extends Controller
         $receiver=$request->input('receiver');
         $amount=$request->input('amount');
     	//Check if sufficient funds if so reduce sender balance
-    	if(removeFunds($sender,$amount)){
+    	if(self::removeFunds($sender,$amount)){
     		//Add transferred funds to receiver
-    		addFunds($receiver,$amount);
-
+    		self::addFunds($receiver,$amount);
+            //$Response = "success";
     		//Return success indicator
-    		return true;
+    		//return true;
     	}
     	//Return false if insufficient funds thus transfer fails
-    	return false;
+    	//return false;
+        //$Response = "success";
+        return redirect('/transfer');
     }
 }
