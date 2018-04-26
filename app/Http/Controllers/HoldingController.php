@@ -4,6 +4,7 @@ namespace ShareMarketGame\Http\Controllers;
 
 use Illuminate\Http\Request;
 use ShareMarketGame\Share;
+use ShareMarketGame\Holding;
 class HoldingController extends Controller
 {
     //Purchase shares
@@ -20,8 +21,8 @@ class HoldingController extends Controller
     		$hold=new Holding;
 
     		//Set values
-    		$hold->nickname=$name;
-    		$hold->code=$code;
+    		$hold->trading_nickname=$name;
+    		$hold->asx_code=$code;
     		$hold->quantity=$amount;
 
     		//Save to database

@@ -30,6 +30,12 @@ Route::get('/home', function () {
     //return $lists;
 });
 
+Route::get('/home/{code}', function ($code) {
+    $list = DB::table('shares')->where('code',$code)->first();
+    $stock = ShareMarketGame\Holding::all();
+    return view('dashboard.show', compact('list','stock'));
+});
+
 Route::get('/nickname', function () {
     $session_id = \Auth::user()->id;
     $lists2 = ShareMarketGame\TradingAccount::where('user_id' , '=', $session_id)->get();
