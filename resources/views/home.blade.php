@@ -56,17 +56,6 @@
     position: relative;
     display: inline-block;
 }
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 800px;
-    min-height: 130px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    padding: 12px 16px;
-    z-index: 1;
-    white-space: nowrap;
-}
 .dropdown-content2 {
     display: none;
     position: absolute;
@@ -78,12 +67,10 @@
     z-index: 1;
     white-space: nowrap;
 }
-.dropdown:hover .dropdown-content2 {
+.dropdown:hover .dropdown-content2{
     display: block;
 }
-.dropdown:hover .dropdown-content {
-    display: block;
-}
+
 input[type=text] {
     display: inline-block;
     width: 75%;
@@ -191,6 +178,11 @@ input[type=text] {
         </div>
       </div>
     </div>
+    <script>
+    function myFunction(){
+        
+    }
+    </script>
 
     <div class="col-sm-6">
       <div class="card">
