@@ -167,7 +167,7 @@ input[type=text] {
                         <img class="img2" src="https://cdn3.iconfinder.com/data/icons/gray-toolbar-4/512/dustbin-512.png">
                         <div class="dropdown-content2">
                           <h5><b>Confirm deleting this trading account?</b></h5>
-                          <button onclick="myFunction()" class="button2">Delete</button>
+                          <button onclick="myFunction({{$list->nickname}})" class="button2">Delete</button>
                         </div>
                       </div>
                     </td>
@@ -179,8 +179,8 @@ input[type=text] {
       </div>
     </div>
     <script>
-    function myFunction(){
-        
+    function myFunction(String name){
+        var user =
     }
     </script>
 

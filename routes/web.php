@@ -81,6 +81,13 @@ Route::get('/search', function () {
     //return $lists;
 });
 
+Route::get('/home/{code}', function ($code) {
+    $list = DB::table('shares')->where('code',$code)->first();
+    $stock = ShareMarketGame\Holding::all();
+    $trades = ShareMarketGame\TradingAccount::all();
+    return view('dashboard.show', compact('list','stock', 'trades'));
+});
+
 Route::post('/buy', 'HoldingController@buyShares');
 
 Auth::routes();
