@@ -6,7 +6,7 @@ use ShareMarketGame\Leader;
 class LeaderController extends Controller
 {
     //Return order leaderboard
-    public static getLeaderBoard(){
-    return Leader::orderBy('place')->get();
-}
+    public static function getLeaderBoard(){
+        return Leader::orderBy('place')->get();
+    }
 }

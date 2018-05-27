@@ -34,6 +34,8 @@ class ShareController extends Controller
 	*	@return Returns false on invalid input otherwise returns array of values
 	*/
 	public function requestShareData(Request $request){
+
+	    //Take in request data
 		$code=$request->input('code');
 		$timeSeries=$request->input('timeSeries');
 		$time=$request->input('time');
@@ -44,9 +46,11 @@ class ShareController extends Controller
 			return false;
 		}
 
+		//If time series intraday set timeframe
 		if($timeSeries=="INTRADAY"){
 			$time=$request->input('time');
 
+			//Set timeframe string
 			$timestr="&interval="+$time+"min";
 			$accessStr=$time+"min";
 		

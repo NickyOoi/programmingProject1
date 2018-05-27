@@ -10,6 +10,6 @@ $factory->define(ShareMarketGame\FriendRequest::class, function (Faker $faker) {
         'from' => function () {
             return factory(ShareMarketGame\TradingAccount::class)->create()->nickname;
         },
-        'message' => $faker->text($maxNbChars = 20),
+        //'message' => $faker->text($maxNbChars = 20),
     ];
 });

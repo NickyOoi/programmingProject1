@@ -16,7 +16,7 @@ class CreateFriendRequestsTable extends Migration
         Schema::create('friend_requests', function (Blueprint $table) {
             $table->string('to');
             $table->string('from');
-            $table->string('message');
+            //$table->string('message');
             $table->timestamps();
 
 

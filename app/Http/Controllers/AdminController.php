@@ -8,6 +8,7 @@ class AdminController extends Controller
 {
 	public const INACTIVITY_WARNING = 30;
 
+	//Get user accounts that have been inactive for some time
     public static function getInactiveUsers(){
     	//Set date to get users last active before
     	$checkDate = new date('now');

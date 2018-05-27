@@ -8,7 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 use ShareMarketGame\TradingAccount;
 use ShareMarketGame\User;
-use ShareMarketGame\Http\Controllers\TradingAccount;
+use ShareMarketGame\Http\Controllers\TradingAccountController;
 
 
 define("STARTING_BALANCE", "1000000");
@@ -30,12 +30,13 @@ class TradingAccountTest extends TestCase
     	//Initialize request obejct
     	$req = new Request();
     	$req->setMethod('POST');
-    	$req->input('sender')="testtradingoneone";
-    	$req->input('receiver')="testtradingtwoone";
-    	$req->input('amount')=TRANSFER_AMOUNT;
+    	$req->merge(['sender' => "testtradingoneone"]);
+    	$req->merge(['receiver'=>"testtradingtwoone"]);
+    	$req->merge(['amount' =>TRANSFER_AMOUNT]);
 
     	//Transfer funds
-    	transferFunds($req);
+        $tCont = new TradingAccountController();
+    	$tCont.transferFunds($req);
 
     	//Get balances
     	$balSender=TradingAccount::where('nickname','=','testtradingoneone')->first()->balance;
@@ -46,13 +47,41 @@ class TradingAccountTest extends TestCase
     	$this->assertTrue($balReceiver==STARTING_BALANCE+TRANSFER_AMOUNT);
     }
 
+    public function testDeleteTradingAccount(){
+        //Create trading accounts
+        TradingAccount::create([
+            'nickname' => 'deletetradingoneone',
+            'user_id'=>User::where('name','Test person one')->first(),
+            'balance'=>STARTING_BALANCE,
+        ]);
+
+        //Initialize request obejct
+        $req = new Request();
+        $req->setMethod('POST');
+        $req->merge(['deleteName' => "deletetradingoneone"]);
+
+        //Delete account
+        $tCont = new TradingAccountController();
+        $tCont.transferFunds($req);
+
+        //Attempt to retrieve account
+        $account = TradingAccount::where("nickname","=","deletetradingoneone")->first();
+
+        //Make sure account no longer exists
+        $this->assertTrue($account==null);
+    }
+
     //Funds transfer test
-    public function testChangeNickname){
+    public function testChangeNickname(){
     	//Initialize request obejct
     	$req = new Request();
     	$req->setMethod('POST');
-    	$req->input('old')="testtradingoneone";
-    	$req->input('new')="testtradingonetwo";
+    	$req->merge(['old'=>"testtradingoneone"]);
+    	$req->merge(['new'=>"testtradingonetwo"]);
+
+        //Change name
+        $tCont = new TradingAccountController();
+        $tCont.changeNickname($req);
 
     	//Check success
     	$this->assertTrue(User::where('name', '=', 'testtradingonetwo')->exists());

@@ -35,10 +35,12 @@ class TradingAccount extends Model
     	return false;
     }
 
+    //Get all friend requests belonging to this trading account
     public function getFriendRequests(){
         return FriendRequest::where('to', '=', $this->nickname);
     }
 
+    //Get all notification belonging to this tading account
     public function getNotifications(){
         return FriendRequest::where('nickname', '=', $this->nickname);
     }

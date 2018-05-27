@@ -12,7 +12,7 @@ class TradingAccountController extends Controller
 		$session_id = \Auth::user()->id;
         $nname=$request->input('nname');
         $uid = $session_id;
-		//$balance = STARTING_BALANCE;
+
     	//Create Trading Account object
     	$account = new TradingAccount;
 
@@ -27,6 +27,7 @@ class TradingAccountController extends Controller
 
 	}
 
+	//Remove trading account with given name from database
 	public function deleteTradingAccount(Request $request){
 		$nname = $request->input('deleteName');
 		$user = TradingAccount::where('nickname' , '=', $nname)->delete();
