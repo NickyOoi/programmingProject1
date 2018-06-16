@@ -16,7 +16,13 @@ class SellingController extends Controller
         $amount=$request->input('amount');
 
         //Retrieve user holding
-        $hold=Holding::find($name,$code);
+        $hold=Holding::where('trading_nickname', $name)->where('asx_code', $code)->first();
+
+        //CHeck if exists
+        if($hold==null){
+            //Redirect to failed message
+            return false;
+        }
 
         //Retrieve amount of share user holds
         $amountheld=$hold->quantity;
@@ -54,6 +60,6 @@ class SellingController extends Controller
         //Save transaction to database
         $trans->save();
 
-        return true;
+        return redirect('/home')->with('success', 'Sell shares transaction success!');
     }
 }
