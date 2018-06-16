@@ -28,15 +28,16 @@ class SellingController extends Controller
         $amountheld=$hold->quantity;
 
         //Retrieve price of shares
-        $cost=(Share::find($code)->value)*$amount;
+        $cost=0-(Share::find($code)->value)*$amount;
 
         //Return false if insufficient shares
         if($amountheld<$amount){
             return redirect()->back()->with('error', 'Error: Insufficient amount of shares.');
         }
 
+
         //Check if amount held equals sell amount and delete hold if so
-        if(TradingAccountController::removeFunds($name,$cost)){
+        if($amountheld==$amount){
             $hold->delete();
         }
         //Reduce quantity by amount sold
