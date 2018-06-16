@@ -21,7 +21,7 @@ class SellingController extends Controller
         //CHeck if exists
         if($hold==null){
             //Redirect to failed message
-            return false;
+            return redirect()->back()->with('error', 'Error: User does not hold any of the selected shares to sell.');
         }
 
         //Retrieve amount of share user holds
@@ -32,7 +32,7 @@ class SellingController extends Controller
 
         //Return false if insufficient shares
         if($amountheld<$amount){
-            return false;
+            return redirect()->back()->with('error', 'Error: Insufficient amount of shares.');
         }
 
         //Check if amount held equals sell amount and delete hold if so
